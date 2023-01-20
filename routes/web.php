@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return csrf_token();
 });
+
+Route::post('/tasks', [TasksController::class, 'store']);
+Route::get('/tasks', [TasksController::class, 'getList']);
+Route::get('/tasks/{id}', [TasksController::class, 'get']); // show
+Route::post('/tasks/{id}', [TasksController::class, 'update']);
+Route::delete('/tasks/{id}', [TasksController::class, 'destroy']);
